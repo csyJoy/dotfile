@@ -1,0 +1,9 @@
+[".config/nvim"]
+    type = "git-repo"
+    url = "https://github.com/csyJoy/nvimdots.git"
+    [".config/nvim".clone]
+        args = ["-bgeneral"]
+
+[".tmux/plugins/tpm"]
+    type = "git-repo"
+    url = "https://github.com/tmux-plugins/tpm"

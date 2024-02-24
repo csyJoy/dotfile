@@ -1,0 +1,4 @@
+# antigen
+source $HOME/antigen.zsh
+antigen init ~/.antigenrc
+antigen apply

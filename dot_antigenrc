@@ -1,0 +1,31 @@
+# Load oh-my-zsh library
+antigen use oh-my-zsh
+
+# Load bundles from the default repo (oh-my-zsh)
+antigen bundle z
+# antigen bundle autojump
+#antigen bundle git
+antigen bundle command-not-found
+#antigen bundle docker
+antigen bundle pip
+antigen bundle rust
+antigen bundle dotnet
+antigen bundle docker
+antigen bundle git 
+antigen bundle colored-man-pages
+
+# Load bundles from external repos
+
+# Select theme
+antigen theme gnzh 
+# antigen theme denysdovhan/spaceship-prompt
+
+antigen bundle  esc/conda-zsh-completion
+
+# Syntax highlighting bundle.
+antigen bundle zsh-users/zsh-autosuggestions
+antigen bundle zsh-users/zsh-syntax-highlighting
+antigen bundle zsh-users/zsh-completions
+
+# Tell Antigen that you're done
+antigen apply
