@@ -1,16 +1,19 @@
 {{ if eq .chezmoi.os "darwin" -}}
-# macOS-specific code
+#!/bin/bash
+/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+brew install neovim tmux zsh
+curl -L git.io/antigen > $HOME/antigen.zsh
 {{ else if eq .chezmoi.os "linux" -}}
 {{   if eq .chezmoi.osRelease.id "debian" -}}
 # Debian-specific code
 {{   else if eq .chezmoi.osRelease.id "ubuntu" -}}
 #!/usr/bin/sh
 
-apt update
-apt install -y ninja-build gettext cmake unzip curl tmux zsh
+sudo apt update
+sudo apt install -y ninja-build gettext cmake unzip curl tmux zsh
 curl -L git.io/antigen > $HOME/antigen.zsh
 git clone https://github.com/neovim/neovim $HOME/neovim
-cd $HOME/neovim && make CMAKE_BUILD_TYPE=RelWithDebInfo && make install
+cd $HOME/neovim && make CMAKE_BUILD_TYPE=RelWithDebInfo && sudo make install
 export PATH=$PATH:/usr/local/bin
 {{   end }}
 {{ end }}
