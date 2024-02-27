@@ -23,7 +23,7 @@ local function conditionalActivatePane(window, pane, pane_direction, vim_directi
 end
 
 wezterm.on("gui-startup", function(cmd)
-	local tab, pane, window = mux.spawn_window(cmd or {})
+	local _, _, window = mux.spawn_window(cmd or {})
 	window:gui_window():maximize()
 end)
 
@@ -42,15 +42,15 @@ end)
 
 local config = wezterm.config_builder()
 config.color_scheme = "Catppuccin Mocha"
-config.window_background_opacity = 0.8
+config.window_background_opacity = 0.75
 config.inactive_pane_hsb = {
 	saturation = 0.5,
 	brightness = 0.5,
 }
 
-config.hide_tab_bar_if_only_one_tab = true
-
 config.window_decorations = "RESIZE"
+
+config.use_fancy_tab_bar = true
 
 config.font = wezterm.font_with_fallback({
 	{ family = "FiraCode Nerd Font Mono", weight = "Bold" },
