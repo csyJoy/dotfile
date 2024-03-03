@@ -6,12 +6,13 @@ local function isViProcess(pane)
 	-- get_foreground_process_name On Linux, macOS and Windows,
 	-- the process can be queried to determine this path. Other operating systems
 	-- (notably, FreeBSD and other unix systems) are not currently supported
-	return pane:get_foreground_process_name():find("n?vim") ~= nil
+	wezterm.log_info(pane:get_user_vars().PROG == "nvim")
+	return pane:get_user_vars().PROG == "nvim"
 	-- return pane:get_title():find("n?vim") ~= nil
 end
 
-local function conditionalActivatePane(window, pane, pane_direction, vim_direction)
-	if isViProcess(pane) then
+local function conditionalActivatePane(window, pane, pane_direction, vim_direction, enable)
+	if enable and isViProcess(pane) then
 		window:perform_action(
 			-- This should match the keybinds you set in Neovim.
 			act.SendKey({ key = vim_direction, mods = "CTRL" }),
@@ -28,16 +29,28 @@ wezterm.on("gui-startup", function(cmd)
 end)
 
 wezterm.on("ActivatePaneDirection-right", function(window, pane)
-	conditionalActivatePane(window, pane, "Right", "l")
+	conditionalActivatePane(window, pane, "Right", "l", true)
 end)
 wezterm.on("ActivatePaneDirection-left", function(window, pane)
-	conditionalActivatePane(window, pane, "Left", "h")
+	conditionalActivatePane(window, pane, "Left", "h", true)
 end)
 wezterm.on("ActivatePaneDirection-up", function(window, pane)
-	conditionalActivatePane(window, pane, "Up", "k")
+	conditionalActivatePane(window, pane, "Up", "k", true)
 end)
 wezterm.on("ActivatePaneDirection-down", function(window, pane)
-	conditionalActivatePane(window, pane, "Down", "j")
+	conditionalActivatePane(window, pane, "Down", "j", true)
+end)
+wezterm.on("ActivatePaneDirection-right-abs", function(window, pane)
+	conditionalActivatePane(window, pane, "Right", "l", false)
+end)
+wezterm.on("ActivatePaneDirection-left-abs", function(window, pane)
+	conditionalActivatePane(window, pane, "Left", "h", false)
+end)
+wezterm.on("ActivatePaneDirection-up-abs", function(window, pane)
+	conditionalActivatePane(window, pane, "Up", "k", false)
+end)
+wezterm.on("ActivatePaneDirection-down-abs", function(window, pane)
+	conditionalActivatePane(window, pane, "Down", "j", false)
 end)
 
 local config = wezterm.config_builder()
@@ -65,6 +78,10 @@ config.keys = {
 	{ key = "j", mods = "CTRL", action = act.EmitEvent("ActivatePaneDirection-down") },
 	{ key = "k", mods = "CTRL", action = act.EmitEvent("ActivatePaneDirection-up") },
 	{ key = "l", mods = "CTRL", action = act.EmitEvent("ActivatePaneDirection-right") },
+	{ key = "h", mods = "LEADER|CTRL", action = act.EmitEvent("ActivatePaneDirection-left-abs") },
+	{ key = "j", mods = "LEADER|CTRL", action = act.EmitEvent("ActivatePaneDirection-down-abs") },
+	{ key = "k", mods = "LEADER|CTRL", action = act.EmitEvent("ActivatePaneDirection-up-abs") },
+	{ key = "l", mods = "LEADER|CTRL", action = act.EmitEvent("ActivatePaneDirection-right-abs") },
 	{ key = "l", mods = "LEADER", action = wezterm.action.SplitHorizontal({ domain = "CurrentPaneDomain" }) },
 	{ key = "j", mods = "LEADER", action = wezterm.action.SplitVertical({ domain = "CurrentPaneDomain" }) },
 	{ key = "h", mods = "CTRL|SHIFT", action = wezterm.action.AdjustPaneSize({ "Left", 1 }) },
