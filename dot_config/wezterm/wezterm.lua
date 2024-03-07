@@ -52,6 +52,10 @@ end)
 wezterm.on("ActivatePaneDirection-down-abs", function(window, pane)
 	conditionalActivatePane(window, pane, "Down", "j", false)
 end)
+wezterm.on("Detach", function(window, pane)
+	local domain = mux.get_domain(pane:get_domain_name())
+	domain:detach()
+end)
 
 local config = wezterm.config_builder()
 config.color_scheme = "Catppuccin Mocha"
@@ -91,6 +95,7 @@ config.keys = {
 	{ key = "c", mods = "LEADER", action = wezterm.action.SpawnTab("CurrentPaneDomain") },
 	{ key = "n", mods = "LEADER", action = wezterm.action.ActivateTabRelative(1) },
 	{ key = "t", mods = "CTRL|CMD", action = wezterm.action.SpawnTab("CurrentPaneDomain") },
+	{ key = "d", mods = "LEADER", action = act.EmitEvent("Detach") },
 }
 
 return config
