@@ -94,7 +94,7 @@ config.keys = {
 	{ key = "l", mods = "CTRL|SHIFT", action = wezterm.action.AdjustPaneSize({ "Right", 1 }) },
 	{ key = "c", mods = "LEADER", action = wezterm.action.SpawnTab("CurrentPaneDomain") },
 	{ key = "n", mods = "LEADER", action = wezterm.action.ActivateTabRelative(1) },
-	{ key = "t", mods = "CTRL|CMD", action = wezterm.action.SpawnTab("CurrentPaneDomain") },
+	{ key = "t", mods = "CTRL|CMD", action = wezterm.action.SpawnTab("DefaultDomain") },
 	{ key = "d", mods = "LEADER", action = act.EmitEvent("Detach") },
 }
 
