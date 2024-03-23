@@ -1,0 +1,6 @@
+os:
+  editPreset: "nvim"
+git:
+  commit:
+    autoWrapCommitMessage: true
+    autoWrapWidth: 65
