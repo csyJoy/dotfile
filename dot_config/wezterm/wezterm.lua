@@ -117,6 +117,7 @@ config.keys = {
 	{ key = "j", mods = "LEADER", action = wezterm.action.SplitVertical({ domain = "CurrentPaneDomain" }) },
 	{ key = "c", mods = "LEADER", action = wezterm.action.SpawnTab("CurrentPaneDomain") },
 	{ key = "n", mods = "LEADER", action = wezterm.action.ActivateTabRelative(1) },
+	{ key = "N", mods = "LEADER", action = wezterm.action.ActivateTabRelative(-1) },
 	{ key = "t", mods = "CTRL|CMD", action = wezterm.action.SpawnTab("DefaultDomain") },
 	{ key = "d", mods = "LEADER", action = act.EmitEvent("Detach") },
 	-- move between split panes
