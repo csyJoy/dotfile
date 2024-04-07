@@ -3,11 +3,7 @@ local act = wezterm.action
 local mux = wezterm.mux
 
 local function isViProcess(pane)
-	-- get_foreground_process_name On Linux, macOS and Windows,
-	-- the process can be queried to determine this path. Other operating systems
-	-- (notably, FreeBSD and other unix systems) are not currently supported
 	return pane:get_user_vars().PROG == "nvim"
-	-- return pane:get_title():find("n?vim") ~= nil
 end
 
 local function conditionalActivatePane(window, pane, pane_direction, vim_direction, enable)
@@ -51,7 +47,7 @@ end)
 wezterm.on("ActivatePaneDirection-down-abs", function(window, pane)
 	conditionalActivatePane(window, pane, "Down", "j", false)
 end)
-wezterm.on("Detach", function(window, pane)
+wezterm.on("Detach", function(_, pane)
 	local domain = mux.get_domain(pane:get_domain_name())
 	domain:detach()
 end)
