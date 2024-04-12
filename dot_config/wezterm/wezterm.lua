@@ -126,6 +126,17 @@ config.keys = {
 	split_nav("resize", "j"),
 	split_nav("resize", "k"),
 	split_nav("resize", "l"),
+	{
+		key = "l",
+		mods = "CMD",
+		action = wezterm.action_callback(function(window, pane)
+			local pos = pane:get_cursor_position()
+			local dims = pane:get_dimensions()
+			local move_viewport_to_scrollback = string.rep("\r\n", pos.y - dims.physical_top)
+			pane:inject_output(move_viewport_to_scrollback)
+			pane:send_text("\x0c") -- CTRL-L
+		end),
+	},
 }
 
 return config
