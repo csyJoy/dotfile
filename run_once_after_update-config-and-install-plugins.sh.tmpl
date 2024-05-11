@@ -14,5 +14,9 @@ bash $HOME/.tmux/plugins/tpm/scripts/install_plugins.sh
 
 chsh -s $(which zsh)
 bash $HOME/.tmux/plugins/tpm/scripts/install_plugins.sh
+{{   else if eq .chezmoi.osRelease.id "arch" -}}
+#!/usr/bin/sh
+
+chsh -s $(which zsh)
 {{   end }}
 {{ end }}
