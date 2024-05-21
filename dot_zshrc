@@ -42,3 +42,5 @@ else
 fi
 
 compdef _run_prog=nvim
+
+export MANPAGER='nvim +Man!'
