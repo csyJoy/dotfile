@@ -10,7 +10,7 @@ curl -L git.io/antigen > $HOME/antigen.zsh
 sudo apt update
 sudo apt install -y ninja-build gettext cmake unzip curl tmux zsh
 curl -L git.io/antigen > $HOME/antigen.zsh
-git clone https://github.com/neovim/neovim $HOME/neovim
+git clone -b v0.10.0 --depth=1 https://github.com/neovim/neovim $HOME/neovim
 cd $HOME/neovim && make CMAKE_BUILD_TYPE=RelWithDebInfo && sudo make install
 export PATH=$PATH:/usr/local/bin
 {{   else if eq .chezmoi.osRelease.id "ubuntu" -}}
@@ -19,7 +19,7 @@ export PATH=$PATH:/usr/local/bin
 sudo apt update
 sudo apt install -y ninja-build gettext cmake unzip curl tmux zsh
 curl -L git.io/antigen > $HOME/antigen.zsh
-git clone https://github.com/neovim/neovim $HOME/neovim
+git clone -b v0.10.0 --depth=1 https://github.com/neovim/neovim $HOME/neovim
 cd $HOME/neovim && make CMAKE_BUILD_TYPE=RelWithDebInfo && sudo make install
 export PATH=$PATH:/usr/local/bin
 {{   else if eq .chezmoi.osRelease.id "arch" -}}
