@@ -44,3 +44,4 @@ fi
 compdef _run_prog=nvim
 
 export MANPAGER='nvim +Man!'
+alias lg="lazygit"
